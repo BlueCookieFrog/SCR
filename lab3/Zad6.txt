@@ -50,4 +50,4 @@ SCR
 SCR
 
 
-
+Użycie kombinacji Ctrl + Z wymusza podobne zachowanie do SIGSTOP, jednak nie jest to ten sam sygnał.
