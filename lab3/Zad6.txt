@@ -1,0 +1,53 @@
+(2p.) Sprawdź możliwość zawieszania procesu sygnałem SIGSTOP i wznawiania sygnałem SIGCONT. Sprawdź, że sygnał SIGSTOP daje taki sam efekt jak naciśnięcie klawisza Ctrl+Z na terminalu. Sprawdź, że sygnał SIGCONT daje taki sam efekt jak wykonanie polecenia fg lub bg (którego bardziej?).
+
+Za pomocą komendy kill można zawiesić proces sygnałem SIGSTOP. Aby tego dokonać należy wpisać komendę 'kill -19 <PID>'
+
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1  1033  1033  1033 tty2         0 Ss       0   0:00 /init
+ 1033  1034  1034  1033 tty2         0 S     1000   0:00  \_ -bash
+ 1034  1610  1610  1033 tty2         0 S     1000   0:00      \_ python3 main.py
+    1  1579  1579  1579 tty1         0 Ss       0   0:00 /init
+ 1579  1580  1580  1579 tty1         0 S     1000   0:00  \_ -bash
+ 1580  1611  1611  1579 tty1         0 R     1000   0:00      \_ ps axjf
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ kill -19 1610
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1  1033  1033  1033 tty2         0 Ss       0   0:00 /init
+ 1033  1034  1034  1033 tty2         0 S     1000   0:00  \_ -bash
+ 1034  1610  1610  1033 tty2         0 T     1000   0:00      \_ python3 main.py
+    1  1579  1579  1579 tty1         0 Ss       0   0:00 /init
+ 1579  1580  1580  1579 tty1         0 S     1000   0:00  \_ -bash
+ 1580  1612  1612  1579 tty1         0 R     1000   0:00      \_ ps axjf
+
+
+Sygnał SIGCONT pozwala wznowić proces, można to zrobić komendą 'kill -18 <PID>'
+
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ kill -18 1610
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1  1033  1033  1033 tty2         0 Ss       0   0:00 /init
+ 1033  1034  1034  1033 tty2         0 S     1000   0:00  \_ -bash
+ 1034  1610  1610  1033 tty2         0 S     1000   0:00      \_ python3 main.py
+    1  1579  1579  1579 tty1         0 Ss       0   0:00 /init
+ 1579  1580  1580  1579 tty1         0 S     1000   0:00  \_ -bash
+ 1580  1613  1613  1579 tty1         0 R     1000   0:00      \_ ps axjf
+
+Uruchomiony skrypt python z nieskończoną pętlą zatrzymuje się po otrzymaniu sygnału SIGSTOP, natomiast po otrzymaniu sygnału SIGCONT wznawia pracę. 
+
+SCR
+SCR
+SCR
+SCR
+
+[1]+  Stopped                 python3 main.py
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab3$ SCR
+SCR
+SCR
+SCR
+
+
+
