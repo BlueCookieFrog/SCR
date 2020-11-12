@@ -1,0 +1,4 @@
+1. (2p.) Zapoznaj się z programem ps (man ps). Wypróbuj dwa formaty wyświetlania rozszerzonych informacji: -f i -l. Przeczytaj podręcznik polecenia ps aby zrozumieć wyświetlane parametry. Naucz się wybierać zestaw procesów do wyświetlania argumentami opcjonalnymi -u, -t, i -p.
+Ile Twoich procesów istniało w systemie w chwili przykładowego wywołania ps?
+
+Ile procesów sshd istniało w systemie (serwerze) w chwili wykonywania ćwiczenia (sprawdź polecenie pgrep)?
