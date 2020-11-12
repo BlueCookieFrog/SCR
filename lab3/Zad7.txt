@@ -1,0 +1,4 @@
+7. (2p.) Sprawdź wartości priorytetów procesów i ich liczby nice, a następnie przećwicz obniżanie priorytetu pracującego w tle procesu (nice/renice). Czy potrafisz zademonstrować działanie obniżonego liczbą nice priorytetu?
+Podsumuj wynik w raporcie i podaj polecenie obniżania priorytetu procesu.
+
+
