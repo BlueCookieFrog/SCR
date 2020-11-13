@@ -1,0 +1,22 @@
+(2p.) Dodaj w stworzonym \textbfprogramie przechwytywanie sygnału/ów, i wykorzystując sygnały: SIGALRM, SIGTERM, SIGUSR1, SIGUSR2 wypróbuj następujące reakcje na sygnał: (a) wyświetlenie komunikatu i zakończenie pracy programu, (b) wyświetlenie komunikatu i powrót do wykonywania programu, (c) wstrzymywanie odebrania sygnału (np. na 1000 iteracji w pętli), i następnie wznowienie odebrania sygnału, i (d) całkowite ignorowanie sygnału. W raporcie wklej instrukcje programu deklarujące poszczególne reakcje na sygnał, i podsumuj uzyskane wyniki.
+
+
+skrypt zad2.py
+
+a + b)
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$ python3 zad2.py
+Recived: 10
+Recived: 12
+Recived: 14
+Recived: 15 terminating the process
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$
+
+skrypt poprawnie przechwytuje sygnały SIGALRM, SIGUSR1, SIGUSR2, SIGTERM, gdzie ten ostatni poza wyświetleniem komunikatu również zabija proces.
+
+c + d)
+
+Skrypt co pięć sekund przełącza się między wykrywaniem sygnałów i ich ignorowaniem
+
+
+Zadanie pokazuje w jaki sposób można przechwytywać sygnały wysyłane do programu, co pozwala na wprowadzenie do programu możliwości reakcji na ten sygnał. Może się to okazać szczególnie istotne w przypadku programów operujących na zewnętrznych danych pozwalając reagować na choćby na próbę zamkniecia bez zapisania zmian.
