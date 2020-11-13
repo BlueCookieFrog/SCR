@@ -1,0 +1,28 @@
+(2p.) Napisz \textbfprogram wykonujący jakąś trywialną operację (np. ++i;) w nieskończonej pętli. Skompiluj i uruchom program, a następnie programem top sprawdź, czy Twój program pokazuje się w czołówce programów wykorzystujących cykle obliczeniowe komputera. Przed przejściem do dalszych prac zabij program klawiszem Ctrl-C. Dodaj w pętli opóźnienie (sleep(1);, a najlepiej nanosleep(); z opóźnieniem np. 100 milisekund) i upewnij się, że po uruchomieniu tego programu nie pojawia się on już na szczycie listy top. Domyślna częstotliwość odświeżania programu top jest mała, spróbuj ją zmienić korzystając z dostępnej pomocy programu. Zapisz co należało dodać do wywołania programu.
+
+
+skrypt zad1.py przed dodanie funkcji sleep z modułu time
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+   40 borys     20   0   20296   4684   1968 R 100.0  0.0   1:10.83 python
+   43 borys     20   0   17620   2108   1504 R   0.7  0.0   0:00.06 top
+    1 root      20   0    8936    312    268 S   0.0  0.0   0:00.12 init
+    9 root      20   0    8936    220    176 S   0.0  0.0   0:00.01 init
+   10 borys     20   0   16924   3616   3512 S   0.0  0.0   0:00.19 bash
+   22 root      20   0    8936    220    176 S   0.0  0.0   0:00.00 init
+   23 borys     20   0   16792   3412   3308 S   0.0  0.0   0:00.07 bash
+
+skrypt zad1.py po dodaniu funkcji sleep 
+
+  PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    1 root      20   0    8936    312    268 S   0.0  0.0   0:00.12 init
+    9 root      20   0    8936    220    176 S   0.0  0.0   0:00.01 init
+   10 borys     20   0   16924   3636   3532 S   0.0  0.0   0:00.19 bash
+   22 root      20   0    8936    220    176 S   0.0  0.0   0:00.00 init
+   23 borys     20   0   16792   3448   3356 S   0.0  0.0   0:00.19 bash
+   47 borys     20   0   20296   4800   2064 S   0.0  0.0   0:00.01 python
+   48 borys     20   0   17620   2084   1504 R   0.0  0.0   0:00.01 top
+
+Po dodaniu funkcji sleep program już nie widnieje na szczycie programów wykorzystujących cykle obliczeniowe. 
+
+Uruchominie programu top z argumentami -d 0.1 zwiększa jego częstotliwość odświeżania, dzięki czemu można zaobserwować regularne skoki w użyciu procesora przez uruchomiony skrypt.

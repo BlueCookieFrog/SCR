@@ -1,0 +1,55 @@
+(2p.) Zapoznaj się z narzędziami umożliwiającymi odczyt pseudosystemu plików proc (man proc). W systemie Solaris pliki w tym systemie mają specyficzny format, i do ich odczytu i dekodowania treści służy odpowiedni zestaw programów. W systemie Linux pliki w /proc maja formaty tekstowe i można je odczytywać (a w konkretnych przypadkach również zapisywać) zwykłymi narzędziami do operacji na plikach tekstowych, jak: cat, grep, itp. Do wykonania ćwiczenia wybierz dowolny, działający program w systemie lub uruchom własny program.
+
+/proc to folder w linuxie, który zawiera informacje na temat uruchomionych procesów.
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$ ls /proc
+1    121  9        cmdline      interrupts  mounts  stat  uptime
+10   22   bus      cpuinfo      loadavg     net     sys   version
+118  23   cgroups  filesystems  meminfo     self    tty   version_signature
+
+nazwy katalogów wewnątrz folderu proc to numery PID procesów. Np. konsola pythonowa ma PID 118.
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1     9     9     9 tty1         0 Ss       0   0:00 /init
+    9    10    10     9 tty1         0 S     1000   0:00  \_ -bash
+   10   120   120     9 tty1         0 R     1000   0:00      \_ ps axjf
+    1    22    22    22 tty2         0 Ss       0   0:00 /init
+   22    23    23    22 tty2         0 S     1000   0:00  \_ -bash
+   23   118   118    22 tty2         0 S     1000   0:00      \_ python
+
+Można otworzyć folder tego procesu
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$ cd /proc/118
+borys@DESKTOP-3LSVF8E:/proc/118$ ls
+attr     comm     fd       mountinfo   ns             schedstat  statm
+auxv     cwd      gid_map  mounts      oom_adj        setgroups  status
+cgroup   environ  limits   mountstats  oom_score_adj  smaps      task
+cmdline  exe      maps     net         root           stat       uid_map
+
+można również zajrzeć do pliku stat w folderze proc za pomocą komendy cat:
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab4$ cat /proc/stat
+cpu  550918 0 281672 7040409 0 41867 0 0 0 0
+cpu0 54717 0 53885 547481 0 11981 0 0 0 0
+cpu1 20212 0 14200 621671 0 2539 0 0 0 0
+cpu2 72071 0 40520 543493 0 2259 0 0 0 0
+cpu3 50468 0 15353 590262 0 525 0 0 0 0
+cpu4 57534 0 35928 562621 0 2525 0 0 0 0
+cpu5 19223 0 12337 624523 0 1331 0 0 0 0
+cpu6 94500 0 25240 536343 0 2193 0 0 0 0
+cpu7 25790 0 7679 622614 0 853 0 0 0 0
+cpu8 66587 0 23325 566171 0 4359 0 0 0 0
+cpu9 16767 0 12529 626787 0 7392 0 0 0 0
+cpu10 52531 0 21553 582001 0 3296 0 0 0 0
+cpu11 20518 0 19123 616442 0 2614 0 0 0 0
+intr 894498 377553 332 0 0 0 0 0 0 0 287178 0 0 1078 0 8572 189 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+ctxt 494453
+btime 1605287977
+processes 117
+procs_running 1
+procs_blocked 0
+softirq 531871 0 166655 5588 285920 8660 0 272 0 791 63985
+
+jak widać plik ten zawiera podstawowe informacje na temat CPU, przerwań czy np. daty uruchomienia systemu
