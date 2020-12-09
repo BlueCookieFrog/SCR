@@ -1,0 +1,18 @@
+(2p.) Uruchom potok co najmniej trzech poleceń działających przez jakiś zauważalny czas. Mogą to być odpowiednio dobrane polecenia systemowe, lub samodzielnie napisane skrypty. Sprawdź poleceniem ps i odpowiedz jakie zachodzi pokrewieństwo między tymi procesami (jeśli w ogóle zachodzi).
+Wskazówka: ponieważ potok służy do przesyłania danych od procesu do procesu, i synchronizuje pracę wszystkich procesów odpowiednio do pojawiających się danych, dobrą metodą generowania demonstracyjnego potoku jest umieszczenie na jego początku procesu, wysyłającego na swoje wyjście stały strumień danych, np. piszącego w pętli co sekundę jakiś krótki komunikat. Kolejne elementy potoku mogą być realizowane przez program cat.
+
+
+borys@DESKTOP-3LSVF8E:/mnt/d/_Git/SCR/Lab3$ python3 | grep scr | cat
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1  1033  1033  1033 tty2         0 Ss       0   0:00 /init
+ 1033  1034  1034  1033 tty2         0 S     1000   0:00  \_ -bash
+ 1034  1576  1576  1033 tty2         0 S     1000   0:00      \_ python3
+ 1034  1577  1576  1033 tty2         0 S     1000   0:00      \_ grep --color=auto scr
+ 1034  1578  1576  1033 tty2         0 S     1000   0:00      \_ cat
+    1  1579  1579  1579 tty1         0 Ss       0   0:00 /init
+ 1579  1580  1580  1579 tty1         0 S     1000   0:00  \_ -bash
+ 1580  1592  1592  1579 tty1         0 R     1000   0:00      \_ ps axjf
+
+Wszystkie procesy są dziećmi procesu basha 1034.

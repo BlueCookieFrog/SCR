@@ -1,0 +1,30 @@
+7. (2p.) Sprawdź wartości priorytetów procesów i ich liczby nice, a następnie przećwicz obniżanie priorytetu pracującego w tle procesu (nice/renice). Czy potrafisz zademonstrować działanie obniżonego liczbą nice priorytetu?
+Podsumuj wynik w raporcie i podaj polecenie obniżania priorytetu procesu.
+
+
+Przykłdowe wartości priorytetu i wartości nice procesów uruchomionych w danym momencie na komputerze.
+
+ PID USER      PR  NI    VIRT    RES    SHR S  %CPU %MEM     TIME+ COMMAND
+    1 root      20   0    8936    268    224 S   0.0  0.0   0:00.09 init
+   70 root      20   0    8936    200    160 S   0.0  0.0   0:00.00 init
+   71 borys     20   0   16924   3528   3404 S   0.0  0.0   0:00.13 bash
+   83 root      20   0    8936    200    160 S   0.0  0.0   0:00.00 init
+   84 borys     20   0   16792   3296   3088 S   0.0  0.0   0:00.18 bash
+  166 borys     20   0   17620   2040   1508 R   0.0  0.0   0:01.47 top
+
+Wartość nice możn nadać procesowi podczas uruchamiania go. Należy użyć do tego komendy nice, na przykład:
+
+nice -n 5 ./skrypt.sh
+
+ta komenda nada wartość nice równą dwa dla procesu wykonującego skrypt ./skrypt.sh.
+
+
+Do zmiany wartości nice należy użyć komendy renice, na przykład
+
+renice -n 8 -p 123
+
+ta komenda zmieni wartość nice procesowi o PID 123 na 8.
+
+
+Warto zauważyć, że wartość nice przyjmuje wartości w zakresie < -20, 19 > (im niższa wartość, tym wyższy priorytet), gdzie wartości <-20, -1> może nadać tylko root.
+

@@ -1,0 +1,37 @@
+1. (2p.) Zapoznaj się z programem ps (man ps). Wypróbuj dwa formaty wyświetlania rozszerzonych informacji: -f i -l. Przeczytaj podręcznik polecenia ps aby zrozumieć wyświetlane parametry. Naucz się wybierać zestaw procesów do wyświetlania argumentami opcjonalnymi -u, -t, i -p.
+Ile Twoich procesów istniało w systemie w chwili przykładowego wywołania ps?
+
+Ile procesów sshd istniało w systemie (serwerze) w chwili wykonywania ćwiczenia (sprawdź polecenie pgrep)?
+
+
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps
+  PID TTY          TIME CMD
+   84 tty2     00:00:00 bash
+  119 tty2     00:00:00 ps
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps -f
+UID        PID  PPID  C STIME TTY          TIME CMD
+borys       84    83  0 21:25 tty2     00:00:00 -bash
+borys      120    84  0 21:31 tty2     00:00:00 ps -f
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps -l
+F S   UID   PID  PPID  C PRI  NI ADDR SZ WCHAN  TTY          TIME CMD
+0 S  1000    84    83  0  80   0 -  4198 -      tty2     00:00:00 bash
+0 R  1000   121    84  0  80   0 -  4271 -      tty2     00:00:00 ps
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$
+
+I -f, i -l wyświetlają rozszerzone informacje na temat uruchomionych procesów. -f wyświetla między innymi godzinę uruchomienia procesu czy argumenty z jakimi został uruchomiony proces.
+
+ -u userlist
+Select by effective user ID (EUID) or name.  This selects the processes whose effective user name or ID is in userlist.
+The effective user ID describes the user whose file access permissions are used by the process (see geteuid(2)).  Identical to U and --user.
+
+-p
+ -p pidlist
+Select by PID.  This selects the processes whose process ID numbers appear in pidlist.  Identical to p and --pid.
+
+-t ttylist
+Select by tty.  This selects the processes associated with the terminals given in ttylist.  Terminals (ttys, or screens for text output) can be specified in several forms: /dev/ttyS1,
+ttyS1, S1.  A plain "-" may be used to select processes not attached to any terminal.
+
+W chili przykładowego wywołania ps istniało 19 procesów
+
+0 procesow sshd działało w systemie

@@ -1,0 +1,32 @@
+2. (2p.) W jednym okienku terminala uruchom hierarchię co najmniej trzech procesów, tzn. procesy A, który uruchomi proces potomny B, który uruchomi proces potomny C. Mogą to być kolejno uruchamiane interpretery poleceń, albo uruchamiające się kolejno skrypty lub programy. W innym oknie terminala sprawdź programem ps zależności potomków i rodziców w utworzonej hierarchii.
+Poleceniem kill zabij proces w środku tej hierarchii (B). Sprawdź poleceniem ps co pozostało z pierwotnych procesów, i czy osierocony proces zostanie poprawnie adoptowany przez proces init.
+
+W sprawozdaniu z wykonania zadania opisz tylko otrzymany wynik, nie wklejaj napisanych skryptów.
+
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1     9     9     9 tty1         0 Ss       0   0:00 /init
+    9    10    10     9 tty1         0 S     1000   0:00  \_ -bash
+   10    35    35     9 tty1         0 S     1000   0:00      \_ bash
+   35    43    43     9 tty1         0 S     1000   0:00          \_ bash
+   43    51    51     9 tty1         0 S     1000   0:00              \_ bash
+   51    59    59     9 tty1         0 S     1000   0:00                  \_ bash
+    1    22    22    22 tty2         0 Ss       0   0:00 /init
+   22    23    23    22 tty2         0 S     1000   0:00  \_ -bash
+   23    67    67    22 tty2         0 R     1000   0:00      \_ ps axjf
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ kill -9 43
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$ ps axjf
+ PPID   PID  PGID   SID TTY      TPGID STAT   UID   TIME COMMAND
+    0     1     1     1 ?            0 Ssl      0   0:00 /init
+    1     9     9     9 tty1         0 Ss       0   0:00 /init
+    9    10    10     9 tty1         0 S     1000   0:00  \_ -bash
+   10    35    35     9 tty1         0 S     1000   0:00      \_ bash
+    1    22    22    22 tty2         0 Ss       0   0:00 /init
+   22    23    23    22 tty2         0 S     1000   0:00  \_ -bash
+   23    68    68    22 tty2         0 R     1000   0:00      \_ ps axjf
+    1    51    51     9 tty1         0 S     1000   0:00 bash
+   51    59    59     9 tty1         0 S     1000   0:00  \_ bash
+borys@DESKTOP-3LSVF8E:/mnt/c/Users/stasz$
+
+Po zabiciu procesu 43 ze środka drzewa widać, że procesy znajdujące się wcześniej nad nim (procesy 51 i 59) zostały przejęte przez init.
